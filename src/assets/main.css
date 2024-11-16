@@ -1,0 +1,82 @@
+@import './base.css';
+
+/* Đặt chiều rộng tối đa cho #app */
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+
+/* Căn chỉnh toàn bộ màn hình */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Thiết kế navbar cố định ở trên cùng */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+/* Thiết kế link */
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+/* Responsive cho màn hình lớn (>= 1024px) */
+@media (min-width: 1024px) {
+  #app {
+    width: 100%;
+    padding: 0 2rem;
+  }
+}
+
+/* Responsive cho tablet (600px - 1024px) */
+@media (min-width: 600px) and (max-width: 1023px) {
+  #app {
+    padding: 1rem;
+  }
+
+  .navbar {
+    padding: 0.5rem;
+  }
+}
+
+/* Responsive cho mobile (dưới 600px) */
+@media (max-width: 599px) {
+  #app {
+    padding: 0.5rem;
+  }
+
+  .navbar {
+    padding: 0.5rem;
+    font-size: 14px;
+  }
+}
