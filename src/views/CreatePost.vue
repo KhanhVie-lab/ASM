@@ -1,6 +1,7 @@
 <template>
     <section id="create-post" class="create-post section">
       <div class="container section-title">
+        <br> <br>
         <h2>Create a New Post</h2>
         <p>Write and publish your blog post</p>
       </div>

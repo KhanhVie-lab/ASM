@@ -4,8 +4,8 @@
     <!-- Navbar brand -->
     
  <div class="container-fluid">
-         <h2>Videos</h2>
-         <p>Danh sách video<br></p>
+         <h2>Blog</h2>
+         <p>Danh sách blog<br></p>
        </div><!-- End Section Title -->
  
  
