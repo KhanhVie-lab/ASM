@@ -12,14 +12,13 @@
           <tr>
             <th scope="col">Tiêu Đề</th>
             <th scope="col">Danh Mục</th>
-            <th scope="col">Tác Giả</th>
+            <th scope="col">UploadBy</th>
             <th scope="col">Ngày</th>
             <th scope="col">Hành Động</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Lọc bài viết theo người dùng hiện tại -->
-          <tr v-for="(post, index) in userPosts" :key="index">
+          <tr v-for="(post, index) in posts" :key="index">
             <td>{{ post.title }}</td>
             <td>{{ post.category }}</td>
             <td>{{ post.author }}</td>
@@ -58,7 +57,7 @@
             class="form-control"
             v-model="currentPost.author"
             id="author"
-            disabled
+            required
           />
         </div>
         <div class="mb-3">
@@ -93,8 +92,10 @@
   <br />
   <br />
 </template>
+
 <script>
 import Swal from 'sweetalert2'
+
 export default {
   data() {
     return {
@@ -104,31 +105,23 @@ export default {
         category: '',
         imageUrl: '',
         content: '',
-        author: '', // Tác giả sẽ lấy từ currentUser.fullname
+        author: '', // Thêm trường author
         date: new Date().toLocaleDateString(),
       },
       isEditMode: false, // Biến điều khiển chế độ chỉnh sửa
       editIndex: null, // Chỉ số bài viết đang sửa
-      currentUser: JSON.parse(localStorage.getItem('currentUser')) || { fullname: 'Anonymous' }, // Lấy thông tin người dùng hiện tại
     }
-  },
-  computed: {
-    // Lọc bài viết theo tác giả là người dùng hiện tại
-    userPosts() {
-      return this.posts.filter((post) => post.author === this.currentUser.fullname)
-    },
   },
   methods: {
     // Thêm bài viết mới
     addPost() {
-      this.currentPost.author = this.currentUser.fullname // Đảm bảo rằng tác giả là người dùng hiện tại
       this.posts.push({
         title: this.currentPost.title,
         category: this.currentPost.category,
         imageUrl: this.currentPost.imageUrl,
         content: this.currentPost.content,
         date: this.currentPost.date,
-        author: this.currentPost.author,
+        author: this.currentPost.author, // Thêm thông tin tác giả vào bài viết
       })
 
       this.updateLocalStorage()
@@ -150,7 +143,7 @@ export default {
         imageUrl: this.currentPost.imageUrl,
         content: this.currentPost.content,
         date: this.currentPost.date,
-        author: this.currentPost.author,
+        author: this.currentPost.author, // Cập nhật thông tin tác giả
       }
 
       this.updateLocalStorage()
@@ -200,7 +193,7 @@ export default {
         category: '',
         imageUrl: '',
         content: '',
-        author: this.currentUser.fullname, // Đảm bảo trường tác giả luôn đúng
+        author: '', // Đặt lại trường tác giả
         date: new Date().toLocaleDateString(),
       }
       this.isEditMode = false
@@ -213,10 +206,6 @@ export default {
       this.isEditMode = true
       this.editIndex = index
     },
-  },
-  mounted() {
-    // Đảm bảo rằng tác giả trong form là người dùng hiện tại
-    this.currentPost.author = this.currentUser.fullname
   },
 }
 </script>
